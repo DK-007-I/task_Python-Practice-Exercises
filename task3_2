@@ -1,0 +1,8 @@
+sleep_hours = int(input("Enter sleep:"))
+
+if sleep_hours < 7:
+    print("lack sleep")
+elif sleep_hours == 7:
+    print("This's normal")
+else:
+    print("Over sleep")

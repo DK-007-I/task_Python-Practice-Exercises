@@ -1,0 +1,20 @@
+shape = input("Enter the shape (triangle, rectangle, circle): ")
+
+
+if shape == "triangle":
+    base = float(input("Base:"))
+    height = float(input("Height:"))
+    area = 0.5 * base * height
+elif shape == "rectangle":
+    width = float(input("Width:"))
+    height = float(input("Height:"))
+    area = width * height
+elif shape == "cicle":
+    radius = float(input("Radius:"))
+    area = 3.14 * radius ** 2
+else:
+    area = None
+if area is not None:
+    print("Area:", area)
+else:
+    print("Invali shape")

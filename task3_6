@@ -1,0 +1,10 @@
+def  is_lucky_ticket(ticket_number):
+    ticket_sr = str(ticket_number).zfill(6)
+    first_half = sum(int(digit) for digit in ticket_sr[:3])
+    second_half  = sum(int(digit) for digit in ticket_sr[3:])
+    return  first_half == second_half
+ticket = 321123
+if is_lucky_ticket(ticket):
+    print("Lucky ticket")
+else:
+    print("Not a lucky ticket")

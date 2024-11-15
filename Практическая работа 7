@@ -56,3 +56,52 @@ except ValueError:
     print("Введите корректное число") 
 
 Задание3
+bin_sy = ['11011111', '11011101', '11000111', '11011100', '11011110']
+
+dec_sy = []
+
+for bin_num in bin_sy:
+    dec_sy.append(int(bin_num, 2))
+
+print("Десятичные числа:")
+for dec_num in dec_sy:
+    print(dec_num)
+
+max_num = max(dec_sy)
+min_num = min(dec_sy)
+
+print(f"Максимальное число: {max_num}")
+print(f"Минимальное число: {min_num}") 
+
+Задание4
+
+A = [
+    [-446, 281, -80],
+    [465, 432, -122],
+    [13, 'error', 8]
+]
+
+for i, row in enumerate(A):
+    for j, element in enumerate(row):
+        if isinstance(element, str):
+            A[i][j] = len(element)
+
+print("Измененная матрица:")
+for row in A:
+    print(row)
+
+total_sum = sum(sum(row) for row in A)
+
+print(f"Сумма всех элементов матрицы: {total_sum}") 
+
+Задание5
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+diagonal_sum = matrix[0][2] + matrix[1][1] + matrix[2][0]
+
+print(f"Сумма элементов диагонали справа налево: {diagonal_sum}")

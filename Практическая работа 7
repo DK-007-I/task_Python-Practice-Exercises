@@ -1,0 +1,46 @@
+Задание 1
+data = [
+    ['2', 'folder', 'icon.ico'],
+    ['3', 'my_song.mp3', 'coursework.doc', 'script.js', 'anapa-2003.jpg', 'folder', 'pict.png', 'data.accdb', 'index.html', 'style.css', 'folder', 'prog.py', 'cheat.txt', 'cs 1.6.exe'],
+    ['4', 'main.py', 'work.pdf', 'cartoon.mp4'],
+    ['5', 'cycle.py', 'folder', 'cycle.js', 'turtle.py', 'notes.txt', 'project.psd']
+]
+
+print("Исходный массив:")
+for row in data:
+    print(row)
+
+for row in data:
+    while 'folder' in row:
+        row.remove('folder')
+    for i in range(len(row)):
+        if row[i] == 'data.accdb':
+            row[i] = 'data.sql'
+
+print("\n После удаления 'folder' и замены 'data.accdb' на 'data.sql':")
+for row in data:
+    print(row)
+
+
+
+ru_files = []
+for row in data:
+    for item in row:
+        if item.endswith('.ru'):
+            ru_files.append(item)
+
+print("\n Элементы с расширением .ru:")
+print(ru_files)
+
+for row in data:
+    for i in range(len(row)):
+        if row[i].endswith('.я'):
+            row[i] = row[i] + ' new'
+
+print("\n После добавления 'new' к элементам с расширением .я:")
+for row in data:
+    print(row)
+
+Задание2
+
+

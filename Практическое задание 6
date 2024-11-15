@@ -1,0 +1,75 @@
+Задание1
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+print("matrix")
+for row in matrix:
+    print(row)
+odd_numbers = ""
+for row in matrix:
+    for element in row:
+        if element % 2 != 0:
+            odd_numbers += str(element)
+print("\n нечетные числа martix")
+print(odd_numbers)
+
+even_count=0
+for row in matrix:
+    for element in row:
+        if element % 2==0:
+            even_count += 1
+print(f"\n кол-во четных: {even_count}")
+
+Задание2
+matrix1 = [[2,4,3,6],[5,7,1,5]]
+matrix2 = [[2,9,0,2],[3,4,7,6]]
+answer_matrix = [[0]*len(matrix1[0])for _ in range(len(matrix1)) ]
+for i in range(len(matrix1)):
+    for j in range(len(matrix1[0])):
+        answer_matrix[i][j] = matrix1[i][j]*matrix2[i][j]
+
+print("Ответная матрица:")
+for row in answer_matrix:
+    print(row)
+
+for row in answer_matrix:
+    row_sum = sum(row)
+    print(f"Сумма строки: {row_sum}")
+
+
+Задание3
+fruits = [['Banana', 'apple'], ['apricot', 'Avocddo'], ['lime', 'lemon'], ['Mango', 'grapes']]
+
+for row in fruits:
+    for fruit in row:
+        if fruit[0].isupper():
+            print(fruit)
+
+
+Задание4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

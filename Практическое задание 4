@@ -1,0 +1,77 @@
+Вариант 1
+Задание 1
+num = int(input())
+if num < 0:
+    print(-num)
+elif num == 0:
+    print(1)
+else:
+    print(num)
+
+Задание2
+s = input('Введите строку')
+if '.' in s or '.' in s:
+    print(True)
+else:
+    print(False)
+
+Задание3
+a = int(input("Введите первое число: "))
+b = int(input("Введите второе число: "))
+
+if a % 3 == 0 and b % 3 == 0:
+    print("True")
+elif a % 3 == 0 or b % 3 == 0:
+    print("Одно число делится на 3")
+else:
+    print("False")
+
+
+Вариант 2
+Задание1
+n = int(input("введите число: "))
+if n > 100:
+    print("*")
+elif n > 0:
+    print("*" * n)
+else:
+    pass
+
+Задание2
+str1 = input("Введите первую строку")
+str2 = input("Введите вторую строку:")
+
+if str1 == str2:
+    print(True)
+else:
+    print(False)
+
+Задание3
+r = int(input("введите значение г:"))
+g = int(input("введите значение д:"))
+b = int(input("введите значение в:"))
+
+if r==0 and g==0 and b==0:
+    print("Черный цвет")
+elif r==255 and g==255 and b==255:
+    print("Беллый цвет")
+elif r==255 and g==0 and b==0:
+    print("Красный цвет")
+elif r==0 and g==255 and b==0:
+    print("Зеленый цвет")
+elif r==0 and g==0 and b==255:
+    print("Синий цвет")
+else:
+    print("Нет цвета")
+
+
+
+
+
+
+
+
+
+
+
+

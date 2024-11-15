@@ -46,6 +46,14 @@ for row in fruits:
 
 Задание4
 
+random_elements = [['toy', 'bee', 'cherry'],
+                   [False, 'word', '0110110', 10],
+                   ['happiness', '%$#&^', 'luck', None],
+                   ['car', '<- code ->', 4.7, True]]
+
+for  row in random_elements:
+    for index, element in enumerate(row):
+        print(element)
 
 
 

@@ -1,0 +1,55 @@
+# Записная книжка в виде словаря
+notebook = {}
+
+# Функция добавления заметки
+def add_note():
+    global notebook
+    title = input("Введите название заметки: ")
+    content = input("Введите текст заметки: ")
+    notebook[title] = content
+    print(f"Заметка '{title}' добавлена.")
+
+# Функция чтения заметок
+def read_note():
+    if not notebook:
+        print("Заметок нет.")
+        return
+    print("Доступные заметки:", ', '.join(notebook.keys()))
+    title = input("Какую заметку прочитать? ")
+    if title in notebook:
+        print("Содержимое заметки:", notebook[title])
+    else:
+        print("Такой заметки нет.")
+
+# Функция удаления заметки
+def delete_note():
+    if not notebook:
+        print("Заметок нет.")
+        return
+    print("Доступные заметки:", ', '.join(notebook.keys()))
+    title = input("Какую заметку удалить? ")
+    if title in notebook:
+        notebook.pop(title)
+        print(f"Заметка '{title}' удалена.")
+    else:
+        print("Такой заметки нет.")
+
+# Меню
+def menu():
+    while True:
+        print("\n[1] - Добавить заметку\n[2] - Прочитать заметку\n[3] - Удалить заметку\n[4] - Выйти")
+        choice = input("Выберите действие: ")
+        if choice == '1':
+            add_note()
+        elif choice == '2':
+            read_note()
+        elif choice == '3':
+            delete_note()
+        elif choice == '4':
+            print("Выход из программы.")
+            break
+        else:
+            print("Неверный выбор, попробуйте снова.")
+
+# Запуск меню
+menu()

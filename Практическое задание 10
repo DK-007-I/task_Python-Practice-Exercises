@@ -1,0 +1,64 @@
+Задание1
+def upper(t):
+    for char in t:
+        if char.isupper():
+            print(char, end=' ')
+    print()
+
+upper('PriVet')
+
+Задание2
+def punct(txt):
+    count = sum(1 for char in txt if char in "!?.(),")
+    print(count)
+
+punct('(Как дела?)')
+
+Задание3
+def create_cube(x, y):
+    for _ in range(y):
+        print('*' * x)
+
+create_cube(5, 3)
+
+Задание4
+def double(s):
+    result = ''.join([char * 2 for char in s])
+    print(result)
+
+double('строка')
+
+Задание5
+def Constructor(details, figures, cars, trees):
+    sets = min(details // 72, figures // 4, cars // 2, trees // 7)
+    print(sets)
+
+Constructor(144, 8, 4, 14)
+Constructor(10000, 16, 6, 2)
+
+Задание6
+def create_list(length, number=0):
+    result = [number] * length
+    print(result)
+
+create_list(5, 3)
+create_list(3)
+
+Задание7
+def custom_filter(data):
+    integers = [x for x in data if isinstance(x, int) and x % 7 == 0]
+    total = sum(integers)
+    print(f"Сумма: {total}")
+    print(total <= 83)
+
+custom_filter([7, 10.5, 'txt', 14, 2, 56])
+
+Задание8
+def square(x, y):
+    print(" " + "_" * 5)
+    print(f"| {x} {y} |")
+    print(" " + "¯" * 5)
+
+square(2, 3)
+
+

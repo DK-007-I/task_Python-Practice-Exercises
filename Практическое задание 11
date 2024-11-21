@@ -1,0 +1,34 @@
+Практическое задание 
+
+import math
+
+def time_to_travel_around_planet(robot_speed, planet_diameter):
+    """
+    Рассчитывает время, необходимое роботу для объезда планеты.
+    
+    :param robot_speed: Скорость робота в км/ч (должна быть больше 0).
+    :param planet_diameter: Диаметр планеты в километрах (должен быть больше 0).
+    :return: Время в часах или сообщение об ошибке.
+    """
+    if robot_speed <= 0 or planet_diameter <= 0:
+        return "Скорость и диаметр должны быть положительными числами!"
+    
+    circumference = math.pi * planet_diameter  # Длина окружности планеты
+    travel_time = circumference / robot_speed  # Время объезда планеты
+    
+    return travel_time
+
+# Пример использования
+robot_name = "Igor_bot V.2.0"
+planet_name = "Земля"
+robot_speed = 10  # Скорость робота в км/ч
+planet_diameter = 12742  # Диаметр планеты в километрах
+
+calculation_1 = time_to_travel_around_planet(robot_speed, planet_diameter)
+if isinstance(calculation_1, str):  # Если это сообщение об ошибке
+    print(calculation_1)
+else:
+    print(f"Роботу {robot_name} необходимо {calculation_1:.2f} часов, "
+          f"чтобы объехать вокруг планеты {planet_name}.")
+
+

@@ -1,0 +1,35 @@
+Задание 1
+while True:
+    try:
+        x = int(input("Введите положительное целое число: "))
+        if x < 0:
+            print(f"{x} - не положительное число. Повторите ввод.")
+            continue
+        print("Диапазон чисел от 0 до x:", *range(x + 1))
+        break
+    except ValueError:
+        print("Введено не число. Повторите ввод.")
+
+Задание 2
+any_list = [4, 3.2, 16, 9, 13.5, 67]
+
+for index, value in enumerate(any_list):
+    try:
+        result = value / index
+        print(f"{value} / {index} = {result}")
+    except ZeroDivisionError:
+        print(f"Деление на 0! Элемент: {value}")
+
+
+Задание 3
+numbers = []
+
+while len(numbers) < 5:
+    try:
+        number = int(input("Введите число: "))
+        numbers.append(number)
+    except ValueError:
+        print("Введено не число. Оно не будет добавлено в список.")
+
+print("Числа в списке:", numbers)
+

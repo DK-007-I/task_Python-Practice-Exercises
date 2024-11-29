@@ -1,1 +1,82 @@
+import random
+import time
+
+def show_loading():
+    """Функция для симуляции загрузки."""
+    print("Загрузка...")
+    for i in range(1, 101):
+        time.sleep(0.05)  # Задержка для имитации загрузки
+        print(f"\r{i}%", end='', flush=True)
+    print("\nЗагрузка завершена!\n")
+
+def display_figure(figure):
+    """Функция для вывода фигуры на экран."""
+    for row in figure:
+        print("".join(row))
+
+def main():
+    # Определим две фигуры
+    figure_1 = [['┓', '┓'], ['┏', '┛']]
+    figure_2 = [['╭', '╮'], ['╰', '╯']]
+    
+    # Случайный выбор фигуры
+    figure_choice = random.choice([figure_1, figure_2])
+    
+    # Подсказка, что должно получиться
+    if figure_choice == figure_1:
+        correct_figure = [['┏', '┓'], ['┗', '┛']]
+        print("Должна получиться фигура:")
+        display_figure(correct_figure)
+    else:
+        correct_figure = [['╭', '╮'], ['╰', '╯']]
+        print("Должна получиться фигура:")
+        display_figure(correct_figure)
+    
+    # Симуляция загрузки перед генерацией фигуры
+    show_loading()
+    
+    # Генерация фигуры с случайными элементами
+    print("\nИсходная фигура:")
+    display_figure(figure_choice)
+    
+    # Маппинг чисел на элементы фигуры
+    element_map = {
+        1: (0, 0),  # ┏
+        2: (0, 1),  # ┓
+        3: (1, 0),  # ┗
+        4: (1, 1)   # ┛
+    }
+    
+    # Цикл изменения элементов фигуры
+    while figure_choice != correct_figure:
+        # Получаем от пользователя номер элемента для изменения
+        try:
+            choice = int(input("\nВведите номер элемента для изменения (1-4): "))
+            if choice < 1 or choice > 4:
+                print("Неверный выбор! Введите число от 1 до 4.")
+                continue
+        except ValueError:
+            print("Введите правильное число!")
+            continue
+        
+        # Меняем выбранный элемент на правильный
+        row, col = element_map[choice]
+        
+        # Если выбрана фигура 1
+        if figure_choice == figure_1:
+            correct_value = correct_figure[row][col]
+            figure_choice[row][col] = correct_value
+        # Если выбрана фигура 2
+        else:
+            correct_value = correct_figure[row][col]
+            figure_choice[row][col] = correct_value
+        
+        # Отображаем текущую фигуру
+        print("\nТекущая фигура:")
+        display_figure(figure_choice)
+    
+    print("\nПоздравляем! Вы создали правильную фигуру!")
+    
+if __name__ == "__main__":
+    main()
 

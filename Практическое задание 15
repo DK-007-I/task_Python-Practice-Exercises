@@ -17,3 +17,39 @@ for _ in range(4):
     turtle.down()
 turtle.done()
 
+task2
+import turtle
+
+# Создаем окно для рисования
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Создаем объект черепашки для рисования
+pen = turtle.Turtle()
+
+# Начальная позиция
+pen.penup()
+pen.goto(-100, 0)
+pen.pendown()
+
+# Рисуем треугольник
+pen.goto(0, 100)  # Вершина треугольника
+pen.goto(100, 0)  # Правый угол треугольника
+pen.goto(-100, 0)  # Закрытие треугольника
+
+turtle.done()
+
+task3
+import turtle
+
+# Создаем окно для рисования
+screen = turtle.Screen()
+screen.bgcolor("lightblue")  # Меняем цвет фона
+
+# Создаем объект черепашки для рисования
+pen = turtle.Turtle()
+
+# Рисуем окружность с радиусом 80 пикселей
+pen.circle(80)
+
+turtle.done()

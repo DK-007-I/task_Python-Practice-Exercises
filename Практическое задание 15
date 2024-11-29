@@ -135,3 +135,85 @@ for i in range(12):  # 12 окружностей
     pen.circle(20 + i * 10)  # Радиус увеличивается с каждой окружностью
 
 turtle.done()
+
+task7
+import turtle
+
+# Настройка экрана
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Создание первой черепашки (для верхней половины окружности)
+pen1 = turtle.Turtle()
+pen1.shape("turtle")
+pen1.color("red")
+pen1.speed(10)
+
+# Создание второй черепашки (для нижней половины окружности)
+pen2 = turtle.Turtle()
+pen2.shape("turtle")
+pen2.color("blue")
+pen2.speed(10)
+
+# Рисуем верхнюю половину окружности с первой черепашкой
+pen1.penup()
+pen1.goto(-100, 0)  # Начальная позиция
+pen1.pendown()
+pen1.setheading(90)  # Направление вверх
+pen1.circle(100, 180)  # Рисуем половину окружности
+
+# Рисуем нижнюю половину окружности с второй черепашкой
+pen2.penup()
+pen2.goto(100, 0)  # Начальная позиция
+pen2.pendown()
+pen2.setheading(270)  # Направление вниз
+pen2.circle(100, -180)  # Рисуем нижнюю половину окружности
+
+# Одна черепашка спускается вниз
+pen1.penup()
+pen1.goto(-100, 0)
+pen1.setheading(270)
+pen1.pendown()
+pen1.forward(100)  # Спускаемся вниз
+
+# Вторая черепашка двигается вниз на половину своей окружности, поворачивает и двигается вперед
+pen2.penup()
+pen2.goto(100, 0)
+pen2.setheading(270)
+pen2.pendown()
+pen2.forward(50)  # Спускаемся вниз на половину окружности
+pen2.left(90)  # Поворот влево
+pen2.forward(50)  # Двигаемся вперед
+
+# Закрытие окна после рисования
+turtle.done()
+
+task8
+import turtle
+
+# Настройка экрана
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Создаем черепашку для рисования круга
+pen = turtle.Turtle()
+pen.shape("turtle")
+pen.color("green")
+pen.speed(5)
+
+# Рисуем круг
+pen.penup()
+pen.goto(0, -100)  # Начальная позиция
+pen.pendown()
+pen.circle(100)  # Радиус круга 100
+
+# Пишем текст внутри круга
+pen.penup()
+pen.goto(0, 0)  # Позиция текста в центре круга
+pen.pendown()
+pen.color("black")
+pen.write("Текст внутри круга", align="center", font=("Arial", 16, "normal"))
+
+# Закрытие окна после рисования
+turtle.done()
+

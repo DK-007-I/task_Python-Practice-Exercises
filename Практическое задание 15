@@ -1,0 +1,19 @@
+task1
+import turtle
+
+screen = turtle.Screen()
+screen.bgcolor("white") #Фон окна
+
+# Создаем объект черепашки для рисования
+
+pen = turtle.Turtle()
+
+# Делаем квадрат с длинной сторон 150 пикселей
+
+for _ in range(4):
+    turtle.up()
+    pen.fd(150)
+    pen.lt(90)
+    turtle.down()
+turtle.done()
+

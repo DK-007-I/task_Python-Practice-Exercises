@@ -53,3 +53,85 @@ pen = turtle.Turtle()
 pen.circle(80)
 
 turtle.done()
+
+task4
+import turtle
+
+# Настройка экрана
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Создаем объект черепашки для рисования
+pen = turtle.Turtle()
+
+# Нарисуем эллипс, рисуя несколько дуг
+pen.shape("turtle")
+pen.penup()
+pen.goto(0, -80)  # Начинаем с нижней точки эллипса
+pen.pendown()
+
+pen.setheading(45)  # Устанавливаем угол для правильного рисования эллипса
+
+# Рисуем эллипс
+pen.circle(100, 90)  # Рисуем первую дугу с радиусом по вертикали
+pen.circle(200, 90)  # Рисуем вторую дугу с радиусом по горизонтали
+pen.circle(100, 90)  # Рисуем третью дугу
+pen.circle(200, 90)  # Рисуем четвертую дугу
+
+turtle.done()
+
+task5
+import turtle
+
+# Настройка экрана
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Создаем объект черепашки для рисования
+pen = turtle.Turtle()
+pen.shape("turtle")
+
+# Настроим скорость рисования
+pen.speed(5)
+
+# Начнем рисовать звезду
+pen.begin_fill()  # Начинаем заливку
+
+pen.fillcolor("yellow")  # Устанавливаем цвет заливки
+
+for _ in range(5):
+    pen.forward(100)  # Рисуем одну сторону звезды
+    pen.right(144)  # Поворот для создания правильного угла
+
+pen.end_fill()  # Заканчиваем заливку
+
+turtle.done()
+
+task6
+import turtle
+
+# Настройка экрана
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Массив цветов
+colors = ["red", "green", "blue", "yellow", "purple", "orange", "cyan"]
+
+# Создаем объект черепашки для рисования
+pen = turtle.Turtle()
+pen.shape("turtle")
+
+# Начальные параметры
+pen.speed(10)  # Устанавливаем быструю скорость рисования
+pen.width(2)
+
+# Рисуем фигуру с несколькими окружностями
+for i in range(12):  # 12 окружностей
+    pen.penup()
+    pen.goto(0, -20 * i)  # Каждый раз перемещаем черепашку вниз
+    pen.pendown()
+    
+    pen.color(colors[i % len(colors)])  # Выбираем цвет из массива
+    pen.circle(20 + i * 10)  # Радиус увеличивается с каждой окружностью
+
+turtle.done()

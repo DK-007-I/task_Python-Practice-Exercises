@@ -217,3 +217,157 @@ pen.write("Текст внутри круга", align="center", font=("Arial", 1
 # Закрытие окна после рисования
 turtle.done()
 
+task9
+import turtle
+
+# Создаем экран и загружаем изображение
+screen = turtle.Screen()
+screen.bgpic("back1.png")  # Путь к вашему изображению
+
+# Создаем черепаху
+t = turtle.Turtle()
+
+# Здесь код для прохождения по белым клеткам, избегая серых клеток
+# Пример пути, который черепаха будет двигаться
+# (этот код зависит от изображения, на котором нужно пройти по белым клеткам)
+
+# Для простоты предположим, что мы двигаемся по определенному маршруту
+# через белые клетки (вам нужно будет добавить проверку на цвет)
+t.penup()
+t.goto(-100, 100)  # Начальная позиция
+t.pendown()
+t.setheading(0)  # Направление вправо
+t.forward(100)
+t.setheading(90)  # Направление вверх
+t.forward(100)
+
+turtle.done()
+
+task10
+import turtle
+
+# Создаем экран и загружаем новое изображение
+screen = turtle.Screen()
+screen.bgpic("back2.png")  # Путь к изображению
+
+# Создаем черепаху
+t = turtle.Turtle()
+
+# Двигаемся по черной линии, которая на изображении
+# Например, можно использовать алгоритм поиска пути (для простоты предполагаем, что линия уже известна)
+
+# Пример движения по черной линии
+t.penup()
+t.goto(-100, 100)
+t.pendown()
+t.setheading(0)  # Направление вправо
+t.forward(100)
+t.setheading(90)  # Направление вверх
+t.forward(100)
+
+turtle.done()
+
+task11
+import turtle
+
+# Список цветов для заливки
+colors = ["red", "blue", "green", "yellow", "purple", "orange"]
+
+# Создаем черепаху
+t = turtle.Turtle()
+
+# Функция для рисования окружности с заливкой
+def draw_circle(radius):
+    for color in colors:
+        t.begin_fill()
+        t.fillcolor(color)
+        t.circle(radius)
+        t.end_fill()
+        t.penup()
+        t.forward(20)  # Немного двигаемся, чтобы нарисовать следующую окружность
+        t.pendown()
+
+# Рисуем окружности с разными цветами
+t.penup()
+t.goto(0, -100)  # Начальная позиция
+t.pendown()
+
+draw_circle(50)
+
+turtle.done()
+
+task12
+import turtle
+
+# Создаем экран и черепаху
+screen = turtle.Screen()
+t = turtle.Turtle()
+
+# Инициализация переменных для подсчета шагов
+total_steps = 0
+
+while True:
+    # Ввод направления и количества шагов
+    direction = screen.textinput("Input", "Введите направление (w, a, s, d) или 'exit' для выхода")
+    
+    if direction == "exit":
+        print(f"Общее количество шагов: {total_steps}")
+        break
+    
+    steps = screen.numinput("Input", "Сколько шагов?")
+    if steps is None:
+        continue
+
+    steps = int(steps)
+    
+    # Двигаем черепаху в соответствующем направлении
+    if direction == "w":
+        t.setheading(90)  # Направление вверх
+        t.forward(steps)
+    elif direction == "a":
+        t.setheading(180)  # Направление влево
+        t.forward(steps)
+    elif direction == "s":
+        t.setheading(270)  # Направление вниз
+        t.forward(steps)
+    elif direction == "d":
+        t.setheading(0)  # Направление вправо
+        t.forward(steps)
+    
+    total_steps += steps
+
+turtle.done()
+
+task13
+import turtle
+
+# Функции для управления черепашкой
+def move_up():
+    t.setheading(90)
+    t.forward(10)
+
+def move_down():
+    t.setheading(270)
+    t.forward(10)
+
+def move_left():
+    t.setheading(180)
+    t.forward(10)
+
+def move_right():
+    t.setheading(0)
+    t.forward(10)
+
+# Создаем экран и черепаху
+screen = turtle.Screen()
+t = turtle.Turtle()
+
+# Связываем функции с кнопками
+screen.listen()
+screen.onkey(move_up, "w")  # Клавиша "w" для движения вверх
+screen.onkey(move_down, "s")  # Клавиша "s" для движения вниз
+screen.onkey(move_left, "a")  # Клавиша "a" для движения влево
+screen.onkey(move_right, "d")  # Клавиша "d" для движения вправо
+
+# Ожидаем нажатий
+screen.mainloop()

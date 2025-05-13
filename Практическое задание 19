@@ -1,0 +1,24 @@
+import urllib.request
+import webbrowser
+
+try:
+    urllib.request.urlopen("http://www.google.com", timeout=3)
+except IOError:
+    print("🔌 Соединения нет.")
+else:
+    query = input("Введите поисковый запрос: ")
+
+    while True:
+        print("Выберите поисковую систему:\n1 — Google\n2 — Yandex")
+        choice = input("Ваш выбор (1 или 2): ")
+
+        if choice == "1":
+            url = f"https://www.google.com/search?q={query}"
+            webbrowser.open_new_tab(url)
+            break
+        elif choice == "2":
+            url = f"https://yandex.ru/search/?text={query}"
+            webbrowser.open_new_tab(url)
+            break
+        else:
+            print("Выберите из предложенных вариантов.")

@@ -1,0 +1,71 @@
+задание 1
+from PIL import Image
+
+image = Image.open("screenshot.jpg")
+bw_image = image.convert("L")
+bw_image.save("screenshot_bw.jpg")
+
+задание 2
+from PIL import Image
+
+image = Image.open("screen_camera.png")
+rotated = image.rotate(180)  # или image.transpose(Image.ROTATE_180)
+rotated.save("screen_camera.png")
+
+задание 3
+from PIL import Image
+
+image = Image.open("figures.png")
+cropped = image.crop((100, 100, 300, 300))  # Пример координат
+cropped.save("cube.png")
+
+задание 4
+from PIL import Image, ImageDraw, ImageFont
+
+image = Image.new("RGB", (200, 200), "lightblue")
+draw = ImageDraw.Draw(image)
+font = ImageFont.truetype("C:\\WINDOWS\\FONTS\\arial.ttf", 20)  # Путь можно поменять
+
+draw.text((10, 90), "Иван был здесь", fill="black", font=font)
+image.save("Иван был здесь.png")
+
+задание 5
+from PIL import Image, ImageDraw
+
+image = Image.open("pixels.png")
+draw = ImageDraw.Draw(image)
+
+# Верхнее отверстие
+draw.rectangle((47, 27, 61, 41), fill="red", outline="black")
+# Нижнее — координаты примерно (обновить по изображению)
+draw.rectangle((47, 87, 61, 101), fill="blue", outline="black")
+
+image.save("pixels_ready.png")
+
+задание 6
+from PIL import Image, ImageDraw
+
+pixels = [
+    [1,1,1,1,1,1,1,1,1],
+    [1,0,1,1,1,1,1,0,1],
+    [1,1,1,0,0,0,1,1,1],
+    [1,1,0,1,0,1,0,1,1],
+    [1,1,0,0,1,0,0,1,1],
+    [1,1,0,1,0,1,0,1,1],
+    [1,1,1,0,0,0,1,1,1],
+    [1,0,1,1,1,1,1,0,1],
+    [1,1,1,1,1,1,1,1,1],
+]
+
+pixel_size = 10
+image = Image.new("RGB", (9 * pixel_size, 9 * pixel_size), "white")
+draw = ImageDraw.Draw(image)
+
+for y, row in enumerate(pixels):
+    for x, value in enumerate(row):
+        color = "black" if value == 1 else "white"
+        top_left = (x * pixel_size, y * pixel_size)
+        bottom_right = ((x + 1) * pixel_size, (y + 1) * pixel_size)
+        draw.rectangle([top_left, bottom_right], fill=color)
+
+image.save("my pixel pict.png")

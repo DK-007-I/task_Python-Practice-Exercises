@@ -1,0 +1,61 @@
+class Hotel:
+    """Класс для бронирования и снятия брони номеров отеля 🏠"""
+
+    def __init__(self, name):
+        self.name = name
+        self.rooms = {
+            100: True, 101: True, 102: True, 103: True,
+            200: True, 201: True, 202: True, 203: True
+        }
+
+    def print_rooms(self):
+        print(self.name)
+        for room, is_free in self.rooms.items():
+            status = "свободен" if is_free else "занят"
+            print(f"Номер № {room} {status}")
+
+    def book_room_by_number(self, room_number):
+        if room_number not in self.rooms:
+            print("Ошибка! Такого номера нет.")
+        elif not self.rooms[room_number]:
+            print(f"Номер {room_number} уже забронирован.")
+        else:
+            self.rooms[room_number] = False
+
+    def finish_number_by_number(self, room_number):
+        if room_number not in self.rooms:
+            print("Ошибка! Такого номера нет.")
+        elif self.rooms[room_number]:
+            print(f"Номер {room_number} не забронирован.")
+        else:
+            self.rooms[room_number] = True
+
+
+# Меню
+hotel = Hotel("Отель: У Олега")
+while True:
+    print("\n[1] - Вывести занятость всех номеров")
+    print("[2] - Занять номер")
+    print("[3] - Снять бронь с номера")
+    print("[4] - Выход")
+    choice = input("> ")
+
+    if choice == '1':
+        hotel.print_rooms()
+    elif choice == '2':
+        try:
+            number = int(input("Введите номер комнаты для брони.\n> "))
+            hotel.book_room_by_number(number)
+        except ValueError:
+            print("Ошибка. Введите номер комнаты.")
+    elif choice == '3':
+        try:
+            number = int(input("Введите номер комнаты для отмены брони.\n> "))
+            hotel.finish_number_by_number(number)
+        except ValueError:
+            print("Ошибка. Введите номер комнаты.")
+    elif choice == '4':
+        print("Выход.")
+        break
+    else:
+        print("Такого варианта нет.")

@@ -1,0 +1,55 @@
+import random
+
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.balance = float(balance)
+        self.account_number = ''.join(str(random.randint(0, 9)) for _ in range(10))
+    
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Пополнение {amount}. Баланс: {int(self.balance)}")
+        print('-' * 25)
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Снятие невозможно! Не хватает средств.")
+        else:
+            self.balance -= amount
+            print(f"Снятие {amount}. Баланс: {int(self.balance)}")
+        print('-' * 25)
+
+    def get_balance(self):
+        print(f"Владелец: {self.owner}")
+        print(f"Номер счёта: {self.account_number}")
+        print(f"Баланс: {int(self.balance)}")
+        print('-' * 25)
+
+    def transfer(self, amount, other_account):
+        if not isinstance(other_account, BankAccount):
+            print("Ошибка! Получатель должен быть счётом банка.")
+        elif amount > self.balance:
+            print("Снятие невозможно! Не хватает средств.")
+        else:
+            self.balance -= amount
+            other_account.balance += amount
+            print(f"Перевод {amount} выполнен на счёт {other_account.owner}.")
+            print(f"Баланс: {int(self.balance)}")
+        print('-' * 25)
+
+
+# Пример использования:
+owner_1 = BankAccount("N. Muller", 10_000)
+owner_1.get_balance()
+
+owner_1.deposit(5_000)
+owner_1.get_balance()
+
+owner_1.withdraw(20_000)
+owner_1.withdraw(3_500)
+
+owner_2 = BankAccount("O. Smith", 5_000)
+owner_2.get_balance()
+
+owner_1.transfer(1_000_000, "Kakoy-to Oleg")
+owner_1.transfer(1_500, owner_2)

@@ -1,0 +1,102 @@
+class Firewall:
+    def __init__(self):
+        self.__open_ports = set()  # Инкапсулированный список открытых портов
+
+    def open_port(self, port):
+        """Открывает указанный порт"""
+        if not isinstance(port, int) or port < 0 or port > 65535:
+            raise ValueError("Порт должен быть числом от 0 до 65535")
+        self.__open_ports.add(port)
+        print(f"Порт {port} успешно открыт")
+
+    def close_port(self, port):
+        """Закрывает указанный порт"""
+        if port in self.__open_ports:
+            self.__open_ports.remove(port)
+            print(f"Порт {port} успешно закрыт")
+        else:
+            print(f"Порт {port} и так закрыт")
+
+    def is_port_open(self, port):
+        """Проверяет, открыт ли порт"""
+        return port in self.__open_ports
+
+    def show_open_ports(self):
+        """Выводит все открытые порты"""
+        if not self.__open_ports:
+            print("Нет открытых портов")
+        else:
+            print("Открытые порты:", sorted(self.__open_ports))
+
+
+class SecureFirewall(Firewall):
+    def __init__(self):
+        super().__init__()
+        self.__blocked_ips = set()  # Заблокированные IP-адреса
+        self.__log_attempts = {}    # Логи попыток подключений {ip: attempts}
+
+    def block_ip(self, ip):
+        """Запрещает указанному IP-адресу доступ"""
+        if not isinstance(ip, str):
+            raise ValueError("IP должен быть строкой")
+        self.__blocked_ips.add(ip)
+        print(f"IP {ip} заблокирован")
+
+    def is_ip_blocked(self, ip):
+        """Проверяет, заблокирован ли IP"""
+        return ip in self.__blocked_ips
+
+    def attempt_connection(self, port, ip):
+        """
+        Проверяет, может ли IP подключиться к открытому порту.
+        Логирует попытки и блокирует IP после 3 неудачных попыток.
+        """
+        if not isinstance(ip, str):
+            raise ValueError("IP должен быть строкой")
+            
+        # Проверка на блокировку IP
+        if ip in self.__blocked_ips:
+            print(f"Ошибка: IP {ip} заблокирован и не может подключиться к порту {port}")
+            return False
+            
+        # Проверка открыт ли порт
+        if not self.is_port_open(port):
+            # Логируем неудачную попытку
+            if ip not in self.__log_attempts:
+                self.__log_attempts[ip] = 1
+            else:
+                self.__log_attempts[ip] += 1
+                
+            print(f"Ошибка: порт {port} закрыт (попытка {self.__log_attempts[ip]} для IP {ip})")
+            
+            # Блокировка после 3 неудачных попыток
+            if self.__log_attempts[ip] >= 3:
+                self.block_ip(ip)
+            return False
+            
+        # Если порт открыт и IP не заблокирован
+        print(f"Успешное подключение IP {ip} к порту {port}")
+        # Сбрасываем счетчик попыток для этого IP при успешном подключении
+        if ip in self.__log_attempts:
+            del self.__log_attempts[ip]
+        return True
+
+
+# Демонстрация работы
+if __name__ == "__main__":
+    print("=== Создание SecureFirewall ===")
+    fs = SecureFirewall()
+    
+    print("\n=== Административная панель ===")
+    fs.open_port(80)
+    fs.open_port(443)
+    fs.show_open_ports()
+    
+    print("\n=== Подключение с разных IP ===")
+    fs.attempt_connection(80, "192.168.1.10")  # Успешное подключение
+    fs.attempt_connection(22, "192.168.1.10")  # Ошибка: порт закрыт
+    fs.attempt_connection(22, "192.168.1.10")  # Вторая попытка
+    fs.attempt_connection(22, "192.168.1.10")  # Третья попытка -> Блокировка
+    
+    print("\n=== Заблокированный IP не может подключиться даже к открытому порту ===")
+    fs.attempt_connection(80, "192.168.1.10")  # Должно показать ошибку блокировки

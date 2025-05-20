@@ -1,1 +1,85 @@
+class Firewall:
+    def __init__(self):
+        self.ports = set()  # Здесь храним открытые порты
+    
+    def open_port(self, port):
+        """Открываем порт"""
+        self.ports.add(port)
+        print(f"Порт {port} открыт")
+    
+    def close_port(self, port):
+        """Закрываем порт"""
+        if port in self.ports:
+            self.ports.remove(port)
+            print(f"Порт {port} закрыт")
+        else:
+            print(f"Порт {port} уже закрыт")
+    
+    def is_port_open(self, port):
+        """Проверяем, открыт ли порт"""
+        return port in self.ports
+    
+    def show_ports(self):
+        """Показываем все открытые порты"""
+        if self.ports:
+            print("Открытые порты:", sorted(self.ports))
+        else:
+            print("Нет открытых портов")
 
+
+class SecureFirewall(Firewall):
+    def __init__(self):
+        super().__init__()
+        self.blocked_ips = set()  # Заблокированные IP
+        self.attempts = {}        # Счетчик попыток
+    
+    def block_ip(self, ip):
+        """Блокируем IP"""
+        self.blocked_ips.add(ip)
+        print(f"IP {ip} заблокирован")
+    
+    def attempt_connection(self, port, ip):
+        """Пытаемся подключиться к порту"""
+        if ip in self.blocked_ips:
+            print(f"IP {ip} заблокирован! Подключение к порту {port} невозможно")
+            return False
+        
+        if not self.is_port_open(port):
+            # Увеличиваем счетчик попыток
+            if ip not in self.attempts:
+                self.attempts[ip] = 1
+            else:
+                self.attempts[ip] += 1
+            
+            print(f"Порт {port} закрыт. Попытка {self.attempts[ip]} для IP {ip}")
+            
+            # Блокируем после 3 попыток
+            if self.attempts[ip] >= 3:
+                self.block_ip(ip)
+            return False
+        
+        # Если дошли сюда - подключение успешно
+        print(f"Успешное подключение IP {ip} к порту {port}")
+        return True
+
+
+# Проверка работы программы
+print("=== Тестируем firewall ===")
+fw = SecureFirewall()
+
+print("\n1. Открываем порты 80 и 443:")
+fw.open_port(80)
+fw.open_port(443)
+fw.show_ports()
+
+print("\n2. Пробуем подключиться:")
+fw.attempt_connection(80, "192.168.1.1")  # Успешно
+fw.attempt_connection(22, "192.168.1.2")  # Неудача (порт закрыт)
+fw.attempt_connection(22, "192.168.1.2")  # Неудача 2
+fw.attempt_connection(22, "192.168.1.2")  # Неудача 3 → блокировка
+
+print("\n3. Пробуем подключиться с заблокированного IP:")
+fw.attempt_connection(80, "192.168.1.2")  # Должно быть отказано
+
+print("\n4. Показываем открытые порты:")
+fw.show_ports()

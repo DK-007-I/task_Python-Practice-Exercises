@@ -1,0 +1,90 @@
+# Импортируем модули для создания абстрактных классов
+from abc import ABC, abstractmethod
+
+# 1. Абстрактный класс Antivirus
+class Antivirus(ABC):
+    def __init__(self, name, version):
+        self.name = name            # Название антивируса
+        self.version = version      # Версия антивируса
+
+    @abstractmethod
+    def scan(self):
+        # Метод для сканирования (будет реализован в дочерних классах)
+        pass
+
+    @abstractmethod
+    def update_database(self):
+        # Метод для обновления базы (будет реализован в дочерних классах)
+        pass
+
+    def show_info(self):
+        # Общий метод, выводит информацию об антивирусе
+        print(f"Антивирус: {self.name}, версия: {self.version}")
+
+# 2. Класс BasicAntivirus — простой антивирус
+class BasicAntivirus(Antivirus):
+    def scan(self):
+        # Сканирование по сигнатурам
+        print(f"{self.name}: Сканирование по сигнатурам...")
+
+    def update_database(self):
+        # Обновление сигнатурной базы
+        print(f"{self.name}: Обновление сигнатурной базы данных...")
+
+# Класс AdvancedAntivirus — продвинутый антивирус
+class AdvancedAntivirus(Antivirus):
+    def scan(self):
+        # Поведенческий анализ
+        print(f"{self.name}: Поведенческий анализ и эмуляция запуска файлов...")
+
+    def update_database(self):
+        # Обновление алгоритмов анализа
+        print(f"{self.name}: Обновление поведенческих алгоритмов...")
+
+# 3. Абстрактный класс OperatingSystem (ОС)
+class OperatingSystem(ABC):
+    def __init__(self, name):
+        self.name = name                      # Название ОС
+        self.installed_antivirus = None       # Установленный антивирус (пока None)
+
+    @abstractmethod
+    def install_antivirus(self, antivirus):
+        # Метод установки антивируса
+        pass
+
+# 4. Классы ОС, наследуют OperatingSystem
+
+class WindowsOS(OperatingSystem):
+    def install_antivirus(self, antivirus):
+        self.installed_antivirus = antivirus
+        print(f"Установлен {antivirus.name} на {self.name}")
+
+class LinuxOS(OperatingSystem):
+    def install_antivirus(self, antivirus):
+        self.installed_antivirus = antivirus
+        print(f"Установлен {antivirus.name} на {self.name}")
+
+class MacOS(OperatingSystem):
+    def install_antivirus(self, antivirus):
+        self.installed_antivirus = antivirus
+        print(f"Установлен {antivirus.name} на {self.name}")
+
+# 5. Создаём объекты антивирусов
+avi = BasicAntivirus("Defender Lite", "1.2")
+av2 = AdvancedAntivirus("CyberShield Pro", "3.8")
+
+# Создаём объекты операционных систем
+win = WindowsOS("Windows 11")
+linux = LinuxOS("Ubuntu 22.04")
+mac = MacOS("MacOS Ventura")
+
+# Устанавливаем антивирусы в ОС
+win.install_antivirus(avi)
+linux.install_antivirus(av2)
+mac.install_antivirus(avi)  # в задании ошибка: avl не существует, ставим avi
+
+# Проверяем работу антивирусов
+print("\n--- Сканирование ---")
+win.installed_antivirus.scan()
+linux.installed_antivirus.scan()
+mac.installed_antivirus.scan()
